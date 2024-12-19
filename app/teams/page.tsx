@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useRef } from 'react';
-import { useStore } from "@/lib/store";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { BsPlusCircle, BsPersonPlusFill } from "react-icons/bs";
+import { useStore } from '@/lib/store';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { BsPlusCircle, BsPersonPlusFill } from 'react-icons/bs';
 import {
   Dialog,
   DialogContent,
@@ -14,7 +14,7 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogClose,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 
 export default function TeamsPage() {
   const { teams, addTeam, addPlayer } = useStore();
@@ -30,7 +30,7 @@ export default function TeamsPage() {
 
   const handleAddTeam = () => {
     if (newTeamName.trim()) {
-      addTeam({ name: newTeamName, players: [] });
+      addTeam({ name: newTeamName });
       setNewTeamName('');
       addTeamCloseRef.current?.click();
     }
@@ -50,7 +50,7 @@ export default function TeamsPage() {
         <h1 className="text-3xl font-bold">Teams</h1>
         <Dialog>
           <DialogTrigger asChild>
-            <Button>
+            <Button className="bg-primary dark:text-white text-black hover:bg-primary/90">
               <BsPlusCircle className="mr-2 h-4 w-4" />
               Add Team
             </Button>

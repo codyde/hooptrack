@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useRef } from 'react';
-import { useStore } from "@/lib/store";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { useStore } from '@/lib/store';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Dialog,
   DialogContent,
@@ -13,23 +13,23 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogClose,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/components/ui/tabs";
+} from '@/components/ui/tabs';
 import { format } from 'date-fns';
-import { BsPlusCircle, BsClock, BsStar } from "react-icons/bs";
-import { GiTrophy } from "react-icons/gi";
+import { BsPlusCircle, BsClock, BsStar } from 'react-icons/bs';
+import { GiTrophy } from 'react-icons/gi';
 
 export default function GamesPage() {
   const { teams, games, addGame, updateGameStats } = useStore();
@@ -49,8 +49,8 @@ export default function GamesPage() {
         teamId: selectedTeamId,
         opponent,
         date: gameDate,
-        stats: [],
-        score: { team: 0, opponent: 0 },
+        scoreTeam: 0,
+        scoreOpponent: 0,
       });
       setOpponent('');
       setGameDate('');
@@ -74,8 +74,11 @@ export default function GamesPage() {
     };
 
     updateGameStats(gameId, {
-      ...playerStats,
-      [statType]: (playerStats[statType] || 0) + 1,
+      playerId,
+      points2: statType === 'points2' ? (playerStats.points2 || 0) + 1 : (playerStats.points2 || 0),
+      points3: statType === 'points3' ? (playerStats.points3 || 0) + 1 : (playerStats.points3 || 0),
+      rebounds: statType === 'rebounds' ? (playerStats.rebounds || 0) + 1 : (playerStats.rebounds || 0),
+      steals: statType === 'steals' ? (playerStats.steals || 0) + 1 : (playerStats.steals || 0),
     });
   };
 

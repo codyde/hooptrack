@@ -2,13 +2,14 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
+import { StoreProvider } from '@/lib/store';
 import Navbar from '@/components/navbar';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'HoopTrack',
-  description: 'Track basketball stats for youth teams and players',
+  description: 'Basketball stats tracking app',
 };
 
 export default function RootLayout({
@@ -21,16 +22,16 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <div className="min-h-screen bg-background">
-            <Navbar />
-            <main className="container mx-auto px-4 py-8">
-              {children}
-            </main>
-          </div>
+          <StoreProvider>
+            <div className="min-h-screen bg-background">
+              <Navbar />
+              <main className="container mx-auto py-8 px-4">{children}</main>
+            </div>
+          </StoreProvider>
         </ThemeProvider>
       </body>
     </html>
